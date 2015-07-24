@@ -1,0 +1,9 @@
+sudo: false
+language: python
+
+before_install:
+    - pip install flask
+       
+
+script:
+        - python test_main.py
