@@ -19,7 +19,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    time.sleep(10)
+    time.sleep(30)
     return "Hello world"
 
 if __name__ == '__main__':
