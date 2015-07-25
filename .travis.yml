@@ -1,9 +1,24 @@
 sudo: false
 language: python
-
+cache:
+  directories:
+  - $HOME/gcloud/
+env:
+- PATH=$PATH:$HOME/gcloud/google-cloud-sdk/bin PYTHONPATH=${HOME}/gcloud/google-cloud-sdk/platform/google_appengine
 before_install:
-    - pip install flask
-       
-
+- openssl aes-256-cbc -K $encrypted_4cb330591e04_key -iv $encrypted_4cb330591e04_iv
+  -in credentials.tar.gz.enc -out credentials.tar.gz -d
+- if [ ! -d $HOME/gcloud/google-cloud-sdk ]; then mkdir -p $HOME/gcloud && wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
+  --directory-prefix=$HOME/gcloud && cd $HOME/gcloud && tar xzf google-cloud-sdk.tar.gz
+  && printf '\ny\n\ny\ny\n' | ./google-cloud-sdk/install.sh && cd $TRAVIS_BUILD_DIR;
+  fi
+- tar -xzf credentials.tar.gz
+- mkdir -p lib
+- gcloud auth activate-service-account --key-file cont-deployment.json
+install:
+- gcloud config set project continuous-deployment-python
+- gcloud -q components update gae-python
+- pip install -r requirements.txt -t lib/
 script:
-        - python test_main.py
+- gcloud -q preview app deploy app.yaml --set-default
+- python e2e_test.py
