@@ -1,46 +1,24 @@
 sudo: false
 language: python
-
-# Cache GCloud SDK Between Travis Runs
 cache:
   directories:
-  - $HOME/gcloud/
-# Add GCloud SDK To Path, AppEngine SDK to PYTHONPATH
+  - "$HOME/gcloud/"
 env:
 - PATH=$PATH:$HOME/gcloud/google-cloud-sdk/bin PYTHONPATH=${HOME}/gcloud/google-cloud-sdk/platform/google_appengine
 before_install:
-    #ENCRYPT YOUR PRIVATE KEY (If you need authentication)
-    # 1. Install and login to the Travis CLI:
-    #       $ gem install travis
-    #       $ travis login
-    # 2. Move your json private key to client_secrets.json
-    # 3. Run:
-    #       $ travis encrypt-file client_secrets.json --add
-    # 4. Commit changes:
-    #       $ git add client_secrets.json.enc
-    #       $ git commit client_secrets.json.enc .travis.yml
-- openssl aes-256-cbc -K $encrypted_4cb330591e04_key -iv $encrypted_4cb330591e04_iv
+- openssl aes-256-cbc -K $encrypted_45d1b36fa803_key -iv $encrypted_45d1b36fa803_iv
   -in credentials.tar.gz.enc -out credentials.tar.gz -d
-# Download Gcloud SDK
 - if [ ! -d $HOME/gcloud/google-cloud-sdk ]; then mkdir -p $HOME/gcloud && wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
   --directory-prefix=$HOME/gcloud && cd $HOME/gcloud && tar xzf google-cloud-sdk.tar.gz
   && printf '\ny\n\ny\ny\n' | ./google-cloud-sdk/install.sh && cd $TRAVIS_BUILD_DIR;
   fi
-# Untar the credentials
 - tar -xzf credentials.tar.gz
-# Create folder to install Python dependencies into
 - mkdir -p lib
-# Authenticate GCloud SDK using decrypted credentials
 - gcloud auth activate-service-account --key-file cont-deployment.json
 install:
-# Set project-id
 - gcloud config set project continuous-deployment-python
-# Install App Engine SDK
 - gcloud -q components update gae-python
-# Install Python dependencies
 - pip install -r requirements.txt -t lib/
 script:
-# Deploy to staging environment
 - gcloud -q preview app deploy app.yaml --set-default
-# Run end-to-end test
 - python e2e_test.py
