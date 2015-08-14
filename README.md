@@ -11,6 +11,26 @@ Please see the associated blog post for details.
 * Download [Google Cloud SDK](https://cloud.google.com/sdk/)
 * Install [Travis CI client](http://blog.travis-ci.com/2013-01-14-new-client/)
 
+## Steps to deploy to your own App Engine project
+* Enable your repo or fork of this repo on Travis CI
+* Delete existing credentials
+`rm credentials.tar.gz.enc`
+* Enable the Books API
+* Download a Public API Key and add it to api_key.py (see sample)
+* Download a Service Account JSON file 'your-project-id.json'
+* Remove the openssl line from the .travis file
+* `tar -czf credentials.tar.gz api_key.py your-project-id.json'
+* `travis login`
+* Encrypt the file with travis, using --add adds the SSL command back 
+to the .travis file 
+   `travis encrypt-file credentials.tar.gz --add`
+* Add the encrypted archive and the changes to the .travis file to your repo
+  `git add credentials.tar.gz`
+  `git add .travis.yml`
+  `git commit -m "Add credentials and Travis changes`
+* Push to your repo and read the Travis console to verify the build succeeds
+  `git push origin master`
+
 
 ## Contributing changes
 
