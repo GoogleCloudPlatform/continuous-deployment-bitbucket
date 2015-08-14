@@ -20,9 +20,9 @@ using Managed VMs.
 `rm credentials.tar.gz.enc`
 * Enable the Books API
 * Download a Public API Key and add it to api_key.py (see sample)
-* Download a Service Account JSON file 'your-project-id.json'
+* Download a Service Account JSON file, copy it into this direcotry as  'cont-deployment.json'
 * Remove the openssl line from the .travis file
-* `tar -czf credentials.tar.gz api_key.py your-project-id.json'
+* `tar -czf credentials.tar.gz api_key.py cont-deployment.json'
 * `travis login`
 * Encrypt the file with travis, using --add adds the SSL command back 
 to the .travis file 
