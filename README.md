@@ -6,6 +6,11 @@ a staging environment.
 
 Please see the associated blog post for details.
 
+## Prerequisites
+
+Download [Google Cloud SDK](https://cloud.google.com/sdk/)
+Install [Travis CI client](http://blog.travis-ci.com/2013-01-14-new-client/)
+
 
 ## Contributing changes
 
