@@ -6,6 +6,9 @@ a staging environment.
 
 Please see the associated blog post for details.
 
+See the `managed_vms` example for a similar repo and Travis deployment
+using Managed VMs.
+
 ## Prerequisites
 
 * Download [Google Cloud SDK](https://cloud.google.com/sdk/)
