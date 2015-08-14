@@ -1,35 +1,24 @@
-# Use Dockerized infrastructure
 sudo: false
 language: python
-# Cache our Gcloud SDK between commands
 cache:
   directories:
   - "$HOME/gcloud/"
 env:
-# Make sure gcloud command is on our PATH and the App Engine SDK is in the Python path
 - PATH=$PATH:$HOME/gcloud/google-cloud-sdk/bin PYTHONPATH=${HOME}/gcloud/google-cloud-sdk/platform/google_appengine
 before_install:
-# Decrypt the credentials we added to the repo using the key we added with the Travis command line tool
-- openssl aes-256-cbc -K $encrypted_45d1b36fa803_key -iv $encrypted_45d1b36fa803_iv
+- openssl aes-256-cbc -K $encrypted_40ce2f227d45_key -iv $encrypted_40ce2f227d45_iv
   -in credentials.tar.gz.enc -out credentials.tar.gz -d
-# If the SDK is not already cached, download it and unpack it
 - if [ ! -d $HOME/gcloud/google-cloud-sdk ]; then mkdir -p $HOME/gcloud && wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
   --directory-prefix=$HOME/gcloud && cd $HOME/gcloud && tar xzf google-cloud-sdk.tar.gz
   && printf '\ny\n\ny\ny\n' | ./google-cloud-sdk/install.sh && cd $TRAVIS_BUILD_DIR;
   fi
 - tar -xzf credentials.tar.gz
 - mkdir -p lib
-# Here we use the decrypted service account credentials to authenticate the command line tool
 - gcloud auth activate-service-account --key-file cont-deployment.json
 install:
-# Set the correct project to deploy to
-- gcloud config set project continuous-deployment-python
-# Install the AppEngine SDk
+- gcloud config set project travis-demo
 - gcloud -q components update gae-python
-# Install the Python dependencies
 - pip install -r requirements.txt -t lib/
 script:
-# Deploy the app
 - gcloud -q preview app deploy app.yaml --set-default
-# Run and end to end test
 - python e2e_test.py
