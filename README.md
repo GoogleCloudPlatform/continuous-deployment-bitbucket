@@ -41,9 +41,9 @@ in order to authenticate the gcloud command line tool.
 `rm credentials.tar.gz.enc`
 * Enable the Books API
 * Download a Public API Key and add it to api_key.py (see sample)
-* Download a Service Account JSON file, copy it into this direcotry as  'cont-deployment.json'
+* Download a Service Account JSON file, copy it into this direcotry as  'client-secret.json'
 * Remove the openssl line from the .travis file
-* `tar -czf credentials.tar.gz api_key.py cont-deployment.json'
+* `tar -czf credentials.tar.gz api_key.py client-secret.json'
 * `travis login`
 * Encrypt the file with travis, using --add adds the SSL command back 
 to the .travis file 
