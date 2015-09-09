@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/GoogleCloudPlatform/continuous-deployment-demo.svg)](https://travis-ci.org/GoogleCloudPlatform/continuous-deployment-demo)
+
 # Sample of how to deploy from Travis CI and run an end-to-end test
 
 This repo demonstrates how to deploy to Google Cloud from a 
