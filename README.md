@@ -6,15 +6,20 @@ This repo demonstrates how to deploy to Google Cloud from a
 Travis file and run an end to end test ( in e2e_test.py) against 
 a staging environment.
 
-See the `managed_vms` example for a similar repo and Travis deployment
-using Managed VMs.
+See the [managed_vms](https://github.com/googlecloudplatform/continuous-deployment-demo/tree/managed_vms) branch for a similar repo and Travis deployment using Managed VMs.
 
-To see an example of deploying using the [builtin Travis deploy provider](http://docs.travis-ci.com/user/deployment/),
-see `appengine_travis_deploy` and `managed_vms_travis_deploy` respectively.
+# Travis Continual Deployment Provider
+
+Travis has a  [builtin Travis deploy provider](http://docs.travis-ci.com/user/deployment/) that can simplify your .travis.yml.
+
 The main difference is that you no longer need to explicitly download the 
 Cloud SDK and run the deploy command, although you still need to 
 specify a service account credential.
 
+To see an example, look at the following branches:
+
+* App Engine [appengine_travis_deploy](https://github.com/GoogleCloudPlatform/continuous-deployment-demo/tree/appengine_travis_deploy)
+* Managed VMS [managed_vms_travis_deploy](https://github.com/GoogleCloudPlatform/continuous-deployment-demo/tree/managed_vms_travis_deploy)
 
 ## Prerequisites
 
