@@ -28,6 +28,10 @@ To see an example, look at the following branches:
 
 ## Steps to deploy to your own App Engine project
 
+You can watch a screencast that walks through these steps with this repo here.
+
+https://www.youtube.com/watch?v=7U4jjRw_AJk&feature=youtu.be
+
 Note that the Books API Key is a specific requirement of this app, but is not generally
 necessary to deploy from Travis. The service account credential is always necessary, 
 in order to authenticate the gcloud command line tool.
