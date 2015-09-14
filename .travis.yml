@@ -30,9 +30,6 @@ install:
 # Install the Python dependencies
 - pip install -r requirements.txt -t lib/
 script:
-# local test
-- ls $PYTHONPATH
-- python test_main.py
 # [START deploy]
 # Deploy the app
 - gcloud -q preview app deploy app.yaml --set-default
