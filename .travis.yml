@@ -12,8 +12,8 @@ env:
 - PYTHONPATH=${PYTHONPATH}:${GAE_PYTHONPATH}
 before_install:
 # Install Google App Engine Python SDK
-- if [[ ! -d "${GAE_PYTHONPATH}" ]]; then
-   python scripts/fetch_gae_sdk.py `dirname "${GAE_PYTHONPATH}"`
+- if [ ! -d "${GAE_PYTHONPATH}" ]; then
+    python scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}");
   fi
 # [START auth]
 # Decrypt the credentials we added to the repo using the key we added with the Travis command line tool
