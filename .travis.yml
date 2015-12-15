@@ -35,7 +35,7 @@ install:
 - pip install -r requirements.txt -t lib/
 script:
 # Run the unit tests
-
+- python test_main.py
 # [START deploy]
 # Deploy the app
 - gcloud -q preview app deploy app.yaml --set-default
