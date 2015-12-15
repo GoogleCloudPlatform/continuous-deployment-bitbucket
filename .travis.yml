@@ -6,9 +6,15 @@ cache:
   directories:
   - "$HOME/gcloud/"
 env:
+- GAE_PYTHONPATH=${HOME}/.cache/google_appengine
 # Make sure gcloud command is on our PATH and the App Engine SDK is in the Python path
-- PATH=$PATH:$HOME/gcloud/google-cloud-sdk/bin PYTHONPATH=${HOME}/gcloud/google-cloud-sdk/platform/google_appengine
+- PATH=$PATH:$HOME/gcloud/google-cloud-sdk/bin 
+- PYTHONPATH=${PYTHONPATH}:${GAE_PYTHONPATH}
 before_install:
+# Install Google App Engine Python SDK
+if [[ ! -d "${GAE_PYTHONPATH}" ]]; then
+   python scripts/fetch_gae_sdk.py `dirname "${GAE_PYTHONPATH}"`
+fi
 # [START auth]
 # Decrypt the credentials we added to the repo using the key we added with the Travis command line tool
 - openssl aes-256-cbc -K $encrypted_45d1b36fa803_key -iv $encrypted_45d1b36fa803_iv -in credentials.tar.gz.enc -out credentials.tar.gz -d
@@ -30,6 +36,8 @@ install:
 # Install the Python dependencies
 - pip install -r requirements.txt -t lib/
 script:
+# Run the unit tests
+
 # [START deploy]
 # Deploy the app
 - gcloud -q preview app deploy app.yaml --set-default
