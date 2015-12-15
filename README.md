@@ -40,6 +40,7 @@ in order to authenticate the gcloud command line tool.
 * Delete existing credentials
 `rm credentials.tar.gz.enc`
 * Enable the Books API
+* Enable the App Engine Admin API
 * Download a Public API Key and add it to api_key.py (see sample)
 * Download a Service Account JSON file, copy it into this direcotry as  'client-secret.json'
 * Remove the openssl line from the .travis file
