@@ -6,10 +6,8 @@ cache:
   directories:
   - "$HOME/gcloud/"
 env:
-- GAE_PYTHONPATH=${HOME}/.cache/google_appengine
 # Make sure gcloud command is on our PATH and the App Engine SDK is in the Python path
-- PATH=$PATH:$HOME/gcloud/google-cloud-sdk/bin 
-- PYTHONPATH=${PYTHONPATH}:${GAE_PYTHONPATH}
+- GAE_PYTHONPATH=${HOME}/.cache/google_appengine PATH=$PATH:${HOME}/gcloud/google-cloud-sdk/bin PYTHONPATH=${PYTHONPATH}:${GAE_PYTHONPATH}
 before_install:
 # Install Google App Engine Python SDK
 - if [ ! -d "${GAE_PYTHONPATH}" ]; then
