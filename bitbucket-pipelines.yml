@@ -17,7 +17,7 @@ pipelines:
           - PATH=$PATH:${GOOGLE_CLOUD_SDK}/bin
           - PYTHONPATH=${PYTHONPATH}:${GAE_PYTHONPATH}
           - python scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}")
-          - gcloud init
+          # - gcloud init
           # - CLOUDSDK_CORE_DISABLE_PROMPTS=1
           # - curl https://sdk.cloud.google.com | bash
           - pip --quiet install -r requirements.txt -t lib/
