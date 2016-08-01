@@ -11,13 +11,10 @@ pipelines:
           - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
           - apt-get update --quiet
           - apt-get install --yes --quiet google-cloud-sdk
-          # - GOOGLE_CLOUD_SDK=${HOME}/google-cloud-sdk
-          # - PATH=$PATH:${GOOGLE_CLOUD_SDK}/bin
-          # - echo "${PATH}" && ls ${GOOGLE_CLOUD_SDK}
-          # - gcloud init
           - GAE_PYTHONPATH=${HOME}/google_appengine
           - export PYTHONPATH=${PYTHONPATH}:${GAE_PYTHONPATH}
           - python scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}")
           - pip --quiet install -r requirements.txt -t lib/
           - echo "${PYTHONPATH}" && ls ${GAE_PYTHONPATH}
+          - cp api_key.py.sample api_key.py
           - python test_main.py
