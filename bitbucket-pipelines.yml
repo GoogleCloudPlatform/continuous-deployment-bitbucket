@@ -8,4 +8,5 @@ pipelines:
           - PATH=$PATH:${HOME}/google-cloud-sdk/bin
           - PYTHONPATH=${PYTHONPATH}:${GAE_PYTHONPATH}
           - CLOUDSDK_CORE_DISABLE_PROMPTS=1
-          - python scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}");
+          - python scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}")
+          - python test_main.py
