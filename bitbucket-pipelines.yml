@@ -5,20 +5,18 @@ pipelines:
     - step:
         script:
           - apt-get update --quiet
-          - apt-get install --yes --quiet zip
           - apt-get install --yes --quiet lsb-release
           - CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
           - echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list
           - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
           - apt-get update --quiet
           - apt-get install --yes --quiet google-cloud-sdk
-          - GAE_PYTHONPATH=${HOME}/.cache/google_appengine
           - GOOGLE_CLOUD_SDK=${HOME}/google-cloud-sdk
           - PATH=$PATH:${GOOGLE_CLOUD_SDK}/bin
+          # - gcloud init
+          - GAE_PYTHONPATH=${HOME}/google_appengine
           - PYTHONPATH=${PYTHONPATH}:${GAE_PYTHONPATH}
           - python scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}")
-          # - gcloud init
-          # - CLOUDSDK_CORE_DISABLE_PROMPTS=1
-          # - curl https://sdk.cloud.google.com | bash
           - pip --quiet install -r requirements.txt -t lib/
+          - echo "${PYTHONPATH}" && ls ${GAE_PYTHONPATH}
           - python test_main.py
