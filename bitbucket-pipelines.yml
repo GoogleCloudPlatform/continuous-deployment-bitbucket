@@ -16,5 +16,7 @@ pipelines:
           - python scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}")
           - pip --quiet install -r requirements.txt -t lib/
           - echo "${PYTHONPATH}" && ls ${GAE_PYTHONPATH}
-          - cp api_key.py.sample api_key.py
+          - echo "key = '${GOOGLE_API_KEY}'" > api_key.py
           - python test_main.py
+          - gcloud -q preview app deploy app.yaml --promote
+          - python e2e_test.py
