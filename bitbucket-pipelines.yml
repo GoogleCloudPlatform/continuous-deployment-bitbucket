@@ -6,6 +6,7 @@ pipelines:
         script:
           - export CLOUDSDK_CORE_DISABLE_PROMPTS=1
           - curl https://sdk.cloud.google.com | bash
+          - export PATH=${PATH}:${HOME}/google-cloud-sdk/bin
           # - apt-get update --quiet
           # - apt-get install --yes --quiet lsb-release
           # - CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
