@@ -4,23 +4,19 @@ pipelines:
   default:
     - step:
         script:
+          # Install Google Cloud SDK
           - export CLOUDSDK_CORE_DISABLE_PROMPTS=1
           - curl https://sdk.cloud.google.com | bash
           - export PATH=${PATH}:${HOME}/google-cloud-sdk/bin
-          # - apt-get update --quiet
-          # - apt-get install --yes --quiet lsb-release
-          # - CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
-          # - echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list
-          # - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-          # - apt-get update --quiet
-          # - apt-get install --yes --quiet google-cloud-sdk
-
+          # Install Google App Engine SDK
           - GAE_PYTHONPATH=${HOME}/google_appengine
           - export PYTHONPATH=${PYTHONPATH}:${GAE_PYTHONPATH}
           - python scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}")
-          - pip --quiet install -r requirements.txt -t lib/
           - echo "${PYTHONPATH}" && ls ${GAE_PYTHONPATH}
+          # Install app & dev dependencies, test, deploy, test deployment
+          - pip --quiet install -r requirements.txt -t lib/
           - echo "key = '${GOOGLE_API_KEY}'" > api_key.py
+          - echo ${GOOGLE_CLIENT_SECRET} > client-secret.json
           - python test_main.py
           - gcloud -q preview app deploy app.yaml --promote
           - python e2e_test.py
