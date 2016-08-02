@@ -19,5 +19,5 @@ pipelines:
           - python test_main.py
           - echo ${GOOGLE_CLIENT_SECRET} > client-secret.json
           - gcloud auth activate-service-account --key-file client-secret.json
-          - gcloud -q preview app deploy app.yaml --promote
+          - gcloud --quiet preview app deploy app.yaml --promote
           - python e2e_test.py

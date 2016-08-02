@@ -12,10 +12,11 @@ import urllib2
 import logging
 import os
 
-HOST = os.getenv('CLOUDSDK_CORE_PROJECT', 'http://continuous-deployment-python.appspot.com')
+HOST_NAME = os.getenv('CLOUDSDK_CORE_PROJECT', 'http://continuous-deployment-python.appspot.com')
+HOST = "http://{hostName}.appspot.com".format(hostName=HOST_NAME)
 
 # [START e2e]
-response = urllib2.urlopen("{}/get_author/ulysses".format(HOST))
+response = urllib2.urlopen("{host}/get_author/ulysses".format(host=HOST))
 html = response.read()
 assert(html == "James Joyce")
 # [END e2e]
