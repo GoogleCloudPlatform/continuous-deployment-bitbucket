@@ -10,8 +10,9 @@
 
 import urllib2
 import logging
+import os
 
-HOST='http://continuous-deployment-python.appspot.com'
+HOST = os.getenv('CLOUDSDK_CORE_PROJECT', 'http://continuous-deployment-python.appspot.com')
 
 # [START e2e]
 response = urllib2.urlopen("{}/get_author/ulysses".format(HOST))
