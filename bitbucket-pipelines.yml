@@ -1,4 +1,4 @@
-image: ibuchanan:googlecloudplatform-sdk-container
+image: ibuchanan/googlecloudplatform-sdk-container
 
 pipelines:
   default:
