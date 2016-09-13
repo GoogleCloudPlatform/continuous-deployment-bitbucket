@@ -1,18 +1,9 @@
-image: python:2.7
+image: ibuchanan:googlecloudplatform-sdk-container
 
 pipelines:
   default:
     - step:
         script:
-          # Install Google Cloud SDK
-          - export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-          - curl https://sdk.cloud.google.com | bash
-          - export PATH=${PATH}:${HOME}/google-cloud-sdk/bin
-          # Install Google App Engine SDK
-          - GAE_PYTHONPATH=${HOME}/google_appengine
-          - export PYTHONPATH=${PYTHONPATH}:${GAE_PYTHONPATH}
-          - python scripts/fetch_gae_sdk.py $(dirname "${GAE_PYTHONPATH}")
-          - echo "${PYTHONPATH}" && ls ${GAE_PYTHONPATH}
           # Install app & dev dependencies, test, deploy, test deployment
           - pip --quiet install -r requirements.txt -t lib/
           - echo "key = '${GOOGLE_API_KEY}'" > api_key.py
