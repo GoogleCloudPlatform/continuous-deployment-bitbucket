@@ -6,7 +6,10 @@ pipelines:
         script:
           # Install Google Cloud SDK
           - export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-          - curl https://sdk.cloud.google.com | bash
+          - SDK_VERSION=127.0.0
+          - SDK_FILENAME=google-cloud-sdk-${SDK_VERSION}-linux-x86_64.tar.gz
+          - curl -O -J https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${SDK_FILENAME}
+          - tar -zxvf ${SDK_FILENAME}
           - export PATH=${PATH}:${HOME}/google-cloud-sdk/bin
           # Install Google App Engine SDK
           - GAE_PYTHONPATH=${HOME}/google_appengine
