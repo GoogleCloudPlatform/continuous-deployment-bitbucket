@@ -6,6 +6,7 @@ pipelines:
         script:
           # Install Google Cloud SDK
           - export CLOUDSDK_CORE_DISABLE_PROMPTS=1
+          # Google Cloud SDK is pinned for build reliability. Bump if the SDK complains about deprecation.
           - SDK_VERSION=127.0.0
           - SDK_FILENAME=google-cloud-sdk-${SDK_VERSION}-linux-x86_64.tar.gz
           - curl -O -J https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/${SDK_FILENAME}
