@@ -4,6 +4,9 @@ This project is a sample,
 demonstrating how to deploy from Bitbucket,
 using Bitbucket Pipelines, to Google App Engine,
 and run an end-to-end test against a staging environment.
+See [documentation on Continuous Deployment to App Engine Using Bitbucket Pipelines](https://cloud.google.com/solutions/continuous-delivery-bitbucket-app-engine) for details.
+Documentation should be considered sufficient only for developers
+who already know both Bitbucket Pipelines and Google App Engine well.
 
 ## Prerequisites
 
